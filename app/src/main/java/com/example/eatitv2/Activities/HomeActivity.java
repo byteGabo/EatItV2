@@ -1,7 +1,8 @@
-package com.example.eatitv2;
+package com.example.eatitv2.Activities;
 
 import android.os.Bundle;
 
+import com.example.eatitv2.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
