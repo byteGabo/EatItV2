@@ -2,6 +2,7 @@ package com.example.eatitv2.Activities;
 
 import android.os.Bundle;
 
+import com.example.eatitv2.EventBus.CategoryClick;
 import com.example.eatitv2.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -21,6 +22,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 import android.view.Menu;
+import android.widget.Toast;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -67,4 +73,28 @@ public class HomeActivity extends AppCompatActivity {
         return NavigationUI.navigateUp(navController, mAppBarConfiguration)
                 || super.onSupportNavigateUp();
     }
+
+    //EventBus
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        EventBus.getDefault().register(this);
+    }
+
+    @Override
+    protected void onStop() {
+        EventBus.getDefault().unregister(this);
+        super.onStop();
+
+    }
+
+    @Subscribe(sticky = true,threadMode = ThreadMode.MAIN)
+    public void onCategorySelected(CategoryClick event)
+    {
+        if (event.isSuccess()){
+            Toast.makeText(this,"Presionado"+event.getCategoryModel().getName(),Toast.LENGTH_SHORT).show();
+        }
+    }
+
 }

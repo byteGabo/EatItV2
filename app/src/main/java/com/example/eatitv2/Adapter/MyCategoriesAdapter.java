@@ -11,9 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.eatitv2.Callback.IRecyclerClickListener;
 import com.example.eatitv2.Common.Common;
+import com.example.eatitv2.EventBus.CategoryClick;
 import com.example.eatitv2.Model.CategoryModel;
 import com.example.eatitv2.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -43,6 +47,12 @@ public class MyCategoriesAdapter extends RecyclerView.Adapter<MyCategoriesAdapte
         Glide.with(context).load(categoryModelList.get(position).getImage())
                 .into(holder.img_category);
         holder.txt_category.setText(new StringBuilder(categoryModelList.get(position).getName()));
+        //evento
+        holder.setListener((view, pos) -> {
+            Common.categorySelected = categoryModelList.get(pos);
+            EventBus.getDefault().postSticky(new CategoryClick(true,categoryModelList.get(pos)));
+
+        });
     }
 
     @Override
@@ -50,16 +60,29 @@ public class MyCategoriesAdapter extends RecyclerView.Adapter<MyCategoriesAdapte
         return categoryModelList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         Unbinder unbinder;
 
         @BindView(R.id.img_category)
         ImageView img_category;
         @BindView(R.id.txt_category)
         TextView txt_category;
+        IRecyclerClickListener listener;
+
+        public void setListener(IRecyclerClickListener listener) {
+            this.listener = listener;
+        }
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             unbinder = ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(this);
+
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onItemClickListener(v,getAdapterPosition());
 
         }
     }

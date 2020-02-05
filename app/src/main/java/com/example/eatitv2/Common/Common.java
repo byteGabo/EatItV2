@@ -1,5 +1,6 @@
 package com.example.eatitv2.Common;
 
+import com.example.eatitv2.Model.CategoryModel;
 import com.example.eatitv2.Model.UserModel;
 
 public class Common {
@@ -10,4 +11,5 @@ public class Common {
     public static final int FULL_WIDTH_COLUMN = 1 ;
     public static final String CATEGORY_REF = "Category" ;
     public static UserModel currentUser;
+    public static CategoryModel categorySelected;
 }
