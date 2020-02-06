@@ -10,6 +10,7 @@ import android.widget.TextView;
 
 import androidx.annotation.Nullable;
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
@@ -17,6 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eatitv2.Adapter.MyFoodListAdapter;
+import com.example.eatitv2.Common.Common;
 import com.example.eatitv2.Model.FoodModel;
 import com.example.eatitv2.R;
 
@@ -58,6 +60,8 @@ public class FoodListFragment extends Fragment {
     }
 
     private void initViews() {
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(Common.categorySelected.getName());
+
         recycler_food_list.setHasFixedSize(true);
         recycler_food_list.setLayoutManager(new LinearLayoutManager(getContext()));
 
