@@ -16,8 +16,10 @@
     <string name="menu_slideshow">Slideshow</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
-    <string name="menu_send">Send</string>
+    <string name="menu_food_list">Food List</string>
     <string name="Catergorias_populares">Categorias Populares</string>
     <string name="lo_mas_visitado">Lo mas pedido</string>
     <string name="menu_menu">Menu</string>
+    <string name="name_food">nombre de comida</string>
+    <string name="price_food">precio</string>
 </resources>
