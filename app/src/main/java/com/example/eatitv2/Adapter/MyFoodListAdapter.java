@@ -11,8 +11,13 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.eatitv2.Callback.IRecyclerClickListener;
+import com.example.eatitv2.Common.Common;
+import com.example.eatitv2.EventBus.FoodItemClick;
 import com.example.eatitv2.Model.FoodModel;
 import com.example.eatitv2.R;
+
+import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
 
@@ -44,6 +49,12 @@ public class MyFoodListAdapter  extends RecyclerView.Adapter<MyFoodListAdapter.M
         holder.txt_food_price.setText(new StringBuilder("Q").append(foodModelList.get(position).getPrice()));
         holder.txt_food_name.setText(new StringBuilder("").append(foodModelList.get(position).getName()));
 
+        //Evento
+        holder.setListener((view, pos) -> {
+            Common.selectedFood = foodModelList.get(pos);
+            EventBus.getDefault().postSticky(new FoodItemClick(true,foodModelList.get(pos)));
+
+    });
     }
 
     @Override
@@ -51,7 +62,7 @@ public class MyFoodListAdapter  extends RecyclerView.Adapter<MyFoodListAdapter.M
         return foodModelList.size();
     }
 
-    public class MyViewHolder extends  RecyclerView.ViewHolder {
+    public class MyViewHolder extends  RecyclerView.ViewHolder implements View.OnClickListener {
         private Unbinder unbinder;
         @BindView(R.id.txt_food_name)
         TextView txt_food_name;
@@ -63,9 +74,24 @@ public class MyFoodListAdapter  extends RecyclerView.Adapter<MyFoodListAdapter.M
         ImageView img_fav_button;
         @BindView(R.id.img_cart_button)
         ImageView img_cart_button;
+
+        IRecyclerClickListener listener;
+
+        public void setListener(IRecyclerClickListener listener) {
+            this.listener = listener;
+        }
+
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             unbinder = ButterKnife.bind(this,itemView);
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View v) {
+            listener.onItemClickListener(v,getAdapterPosition());
         }
     }
 }
+
+

@@ -13,7 +13,7 @@
 
     <string name="menu_home">Home</string>
     <string name="menu_gallery">Gallery</string>
-    <string name="menu_slideshow">Slideshow</string>
+    <string name="menu_food_detail">Food Detail</string>
     <string name="menu_tools">Tools</string>
     <string name="menu_share">Share</string>
     <string name="menu_food_list">Food List</string>
@@ -22,4 +22,6 @@
     <string name="menu_menu">Menu</string>
     <string name="name_food">nombre de comida</string>
     <string name="price_food">precio</string>
+    <string name="description">Description</string>
+    <string name="comentarios">Mostrar Comentarios</string>
 </resources>
