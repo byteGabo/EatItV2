@@ -27,6 +27,7 @@ import com.example.eatitv2.Common.Common;
 import com.example.eatitv2.Model.CommentModel;
 import com.example.eatitv2.Model.FoodModel;
 import com.example.eatitv2.R;
+import com.example.eatitv2.ui.comments.CommentFragment;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
@@ -75,6 +76,13 @@ public class FoodDetailFragment extends Fragment {
     void onRatingButtonClick(){
         showDialogRating();
     }
+
+    @OnClick(R.id.btn_show_comment)
+        void onShowCommentButtonClick(){
+            CommentFragment commentFragment = CommentFragment.getInstance();
+            commentFragment.show(getActivity().getSupportFragmentManager(),"CommentFragment");
+
+        }
 
     private void showDialogRating() {
         androidx.appcompat.app.AlertDialog.Builder builder = new androidx.appcompat.app.AlertDialog.Builder(getContext());
